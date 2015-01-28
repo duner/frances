@@ -37,7 +37,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.gis',
-    'frances.main'
+    'frances.main',
+
+    #Development Tools
+    'debug_toolbar'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -67,6 +70,7 @@ DATABASES = {
      }
 }
 
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
@@ -81,7 +85,18 @@ USE_L10N = True
 USE_TZ = True
 
 
+
+# Templates
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, 'frances/templates'),
+)
+ROOT_URLCONF = 'frances.urls'
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
+STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'frances/static'),
+)
