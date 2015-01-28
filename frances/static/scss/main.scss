@@ -3,10 +3,10 @@
 @import "neat/app/assets/stylesheets/_neat.scss";
 // endbower
 
-$red: #00ff00;
+$green: #00ff00;
 
 body {
-	background-color: red;
+	background-color: $green;
 
 	h1 {
 		font-family: sans-serif;

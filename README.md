@@ -23,4 +23,9 @@ mkvirtualenv frances
 pip install -r requirements.txt
 ```
 
+You should now be able to run your first migration:
 
+```
+python manage.py makemigrations
+python manage.py migrate
+``` 
