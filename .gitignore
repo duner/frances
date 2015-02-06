@@ -1,6 +1,7 @@
 .DS_Store
 bower_components
 node_modules
+frances/main/data/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
