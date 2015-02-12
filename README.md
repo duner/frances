@@ -23,16 +23,26 @@ mkvirtualenv frances
 pip install -r requirements.txt
 ```
 
-Now, download the National Historic Registry data and convert the Microsoft Access Database to a Shapefile. (Note: this requires you to have GDAL installed with the .mdb driver, which can be installed with Homebrew: `gdal reinstall -enable-mdb`)
+Now, download the National Historic Registry data and convert the Microsoft Access Database to a Shapefile. (Note: this requires you to have GDAL installed with the `.mdb` driver, which can be installed with Homebrew: `brew reinstall gdal --enable-mdb`)
 
 ```
 mkdir frances/main/data
 cd frances/main/data
 curl -o spatial.mdb "http://nrhp.focus.nps.gov/natreg/docs/spatial.mdb" 
-ogr2ogr -f "ESRI Shapefile" nrhp.shp spatial.mdb
-ogr2ogr -a_srs NAD27 nrhp_nad27.shp nrhp.shp
-ogr2ogr -f CSV csv/output.csv nrhp_nad27.shp -lco CREATE_CSVT=YES
+curl -O http://nrhp.focus.nps.gov/natreg/docs/NRHP_Midwest_Region.zip
+unzip NRHP_Midwest_Region.zip
+ogr2ogr -f "ESRI Shapefile" nrhp_spatial.shp spatial.mdb
+ogr2ogr -f "KML" illinois.kml doc.kml ILLINOIS
+
+#ogr2ogr -f "KML" -a_srs EPSG:900913 doc_projected.kml doc.kml
 ```
+
+ogr2ogr -f "ESRI Shapefile" nrhp_spatial.shp nrhp_spatial.mdb
+ogr2ogr -a_srs EPSG:900913 nrhp_projected.shp nrhp.shp
+ogr2ogr -f CSV csv/output.csv nrhp_nad27.shp -lco CREATE_CSVT=YES
+
+
+EPSG:900913
 
 You should now be able to run your first migration:
 
