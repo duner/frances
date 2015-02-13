@@ -10,8 +10,6 @@ mapping = {
 
 kml_file = os.path.abspath(os.path.join(os.path.dirname(__file__), 'data/doc.kml'))
 
-# import ipdb; ipdb.set_trace()
-
 print kml_file
 
 lm = LayerMapping(HistoricPlace, kml_file, mapping)
