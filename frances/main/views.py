@@ -31,6 +31,5 @@ class HistoricPlaceListView(ListView):
 
 class HistoricPlaceDetailView(DetailView):
 	model = models.HistoricPlace
-	template_name = 'detail.html'
-
-	def my_view(request, slug, id):
+	template_name = 'details.html'
+	context_object_name = 'place'

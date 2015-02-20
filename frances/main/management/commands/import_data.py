@@ -107,12 +107,12 @@ class Command(BaseCommand):
 
 		def scrape_wikipedia():
 			for state in HistoricPlace.objects.values('state').distinct():
-			state = state.get('state')
-			if state:
-				state_url = get_state_wikipedia_page(state)
-				county_tables = get_county_tables(state_url)
-				for table in county_tables:
-					parse_table_and_save_objects(table)
+				state = state.get('state')
+				if state:
+					state_url = get_state_wikipedia_page(state)
+					county_tables = get_county_tables(state_url)
+					for table in county_tables:
+						parse_table_and_save_objects(table)
 
 		# scrape_wikipedia()
 
