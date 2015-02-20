@@ -1,5 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Hello world.</h1>
+
+
+<ul>
+{% for place in places %}
+	<li>{{ place.name }}</li>
+{% endfor %}
+</ul>
+
 {% endblock %}

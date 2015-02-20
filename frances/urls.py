@@ -12,4 +12,8 @@ urlpatterns = patterns('',
 
     url(r'^$', views.HomeView.as_view(), name='home'),
 
+ 	url(r'^places/list', views.HistoricPlaceListView.as_view()),
+
+ 	url(r'^place/(?P<slug>[\w-]+)/*$', views.HistoricPlaceDetailView.as_view())
+
 )
