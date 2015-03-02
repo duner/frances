@@ -1,0 +1,122 @@
+body {
+	font-family: 'Lora', serif;
+	margin: 0px;
+}
+
+ul {
+	margin-left: 20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+ul li{
+	font-size: 1em;
+}
+
+.footer{
+	font-family: 'Muli', sans-serif;
+	font-size: 1em;
+	text-align: center;
+	width: 100%;
+	background-color: #bdbdbd;
+	color: white;
+	margin-top: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+* {
+	margin: 0;
+}
+
+html, body {
+	height: 100%;
+	/*figure out what's going on with the width */
+}
+
+.wrapper {
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -1em;
+}
+
+.footer, .push {
+	height: 1em;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+a:hover{
+	color: #bdbdbd;
+	text-decoration: underline;
+}
+
+.pagination{
+	margin-left: 45px;
+}
+
+.nav {
+	font-family: 'Muli', sans-serif;
+	font-size: 2em;
+	text-align: center;
+	width: 100%;
+	background-color: #bdbdbd;
+	color: white;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-bottom: 20px;
+	font-weight: 400;
+}
+
+.nav a {
+	color:white;
+}
+
+.nav a:hover{
+	color:black;
+
+}
+
+.details{
+}
+
+.name-of-place {
+	font-size: 3em;
+	text-align: center;
+	font-family: 'Lora', serif;
+	margin-top: 40px;
+}
+
+hr{
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 40px;
+	margin-bottom: 40px;
+	background-color: #bdbdbd;
+	border: 1px solid #bdbdbd;
+}
+
+.info{
+	font-family: 'Muli', sans-serif;
+	width: 35%;
+	margin-left: 10%;
+	margin-right: 5%;
+	float:left;
+}
+
+.map{
+	width: 35%;
+	margin-right: 10%;
+	margin-left: 2%;
+	float: left;
+}
+
+p{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}

@@ -2,8 +2,20 @@
 
 {% block content %}
 
-<div>
-	<p>{{ place }}</p>
+<div class="details">
+	<p class="name-of-place">{{ place }}</p>
+</div>
+<hr>
+<div class="info">
+	<p>
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec faucibus semper gravida. Nulla eget feugiat tellus. Nunc et dignissim sem. Aenean hendrerit purus quam, at imperdiet lacus mattis a. Morbi tristique ligula a pharetra cursus. Fusce sed porta dui. Nullam commodo est commodo enim pulvinar, vitae faucibus massa tempus. 
+	</p>
+	<p>
+		Cras ut justo tortor. Fusce at tincidunt lorem. Maecenas venenatis augue aliquet lacus rutrum commodo. Sed id risus non diam vulputate posuere sed quis erat. Praesent ac dolor efficitur, pretium nisl vel, semper quam. Curabitur velit velit, feugiat sed sapien eget, tempor bibendum velit. Sed enim enim, auctor ut aliquet ac, interdum eu erat.
+	</p>
+</div>
+<div class="map">
+	<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d23699.09748353319!2d-87.6969445!3d42.05631955!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1425327215313" width="400" height="300" frameborder="0" style="border:0"></iframe>
 </div>
 
 {% endblock %}

@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-
 <ul>
 {% for place in historic_places %}
 	<li><a href="{% url 'place-detail' place.slug %}">{{ place.name }}</a></li>
@@ -15,7 +14,9 @@
         {% endif %}
 
         <span class="current">
-            Page {{ page_obj.number }} of {{ paginator.num_pages }}.
+            <em>
+                Page {{ page_obj.number }} of {{ paginator.num_pages }}
+            </em>
         </span>
 
         {% if page_obj.has_next %}
