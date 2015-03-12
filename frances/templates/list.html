@@ -4,7 +4,11 @@
 
 <ul>
 {% for place in historic_places %}
-	<li><a href="{% url 'place-detail' place.slug %}">{{ place.name }}</a></li>
+	<li>
+        <a href="{% url 'place-detail' place.slug %}">{{ place.name }}</a>
+        <br>
+        <a href="{{ place.wikipedia_url }}"></a>
+    </li>
 {% endfor %}
 </ul>
 

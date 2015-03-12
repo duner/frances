@@ -4,6 +4,7 @@ import requests
 
 from django.core.management.base import BaseCommand, CommandError
 from django.db import IntegrityError
+from django.core.exceptions import ObjectDoesNotExist
 from django.template.defaultfilters import slugify
 from django.contrib.gis.utils import LayerMapping
 
@@ -52,6 +53,9 @@ class Command(BaseCommand):
 			except IntegrityError:
 				place.delete()
 
+
+		WIKIPEDIA_BASE_URL = 'http://en.wikipedia.org'
+
 		def get_state_wikipedia_page(state):
 			url = 'http://en.wikipedia.org/wiki/Category:National_Register_of_Historic_Places_lists_by_state'
 			html = requests.get(url)
@@ -60,23 +64,24 @@ class Command(BaseCommand):
 			links = divs[0].findAll('a', text=re.compile(state))
 			return WIKIPEDIA_BASE_URL + links[0].attrs['href']
 
+		def get_table_from_county_page(county_url):
+			html = requests.get(county_url)
+			soup = BeautifulSoup(html.content, 'html.parser')
+			headers = soup.find_all('h2')
+			for head in headers:
+				spans = head.find_all('span', text=re.compile('listing'), class_='mw-headline')
+				if len(spans) > 0:
+					table = head.find_next_sibling('table')
+					if table:
+						return table
+				else:
+					return None
+
 		def get_county_tables(state_url):
 			links = []
 			county_tables = []
 			html = requests.get(state_url)
 			soup = BeautifulSoup(html.content, 'html.parser')
-
-			def get_table_from_county_page(county_url):
-				html = requests.get(county_url)
-				soup = BeautifulSoup(html.content, 'html.parser')
-				headers = soup.find_all('h2')
-				for head in headers:
-					spans = head.find_all('span', text=re.compile('listing'), class_='mw-headline')
-					if len(spans) > 0:
-						table = head.find_next_sibling('table')
-						if table:
-							return table
-				return None
 
 			headers = soup.find_all('h2')
 			for head in headers:
@@ -89,7 +94,7 @@ class Command(BaseCommand):
 						link = cell.find('a')
 						if link:
 							links.append(link.attrs['href'])
-			
+
 			for link in links:
 				if 'wiki' in link:
 					table = get_table_from_county_page(WIKIPEDIA_BASE_URL + link)
@@ -98,12 +103,35 @@ class Command(BaseCommand):
 					h2 = soup.find('span', id=span_id).find_parent('h2')
 					table = h2.find_next_sibling()
 				county_tables.append(table)
-
 			return county_tables
 
-		def parse_table_and_save_objects(table):
+		def get_places_from_table(table):
+			places = []
 			for row in table.find_all('tr')[1:]:
 				place = {}
+				data = row.find_all('td')
+				
+				#Get Ref Num
+				span = data[2].find('center').find('span', class_="refnum")
+				ref_num = span.find_all(['a','small'], text=re.compile('[0-9]*'))[0].string
+				ref_num = re.sub(r'\W+', '', ref_num)
+				place['ref_num'] = ref_num
+
+				#Get URL
+				place['url'] = data[0].find('a').attrs['href']
+
+				places.append(place)
+			return places
+
+		def save_wiki_place(place):
+			try:
+				p = HistoricPlace.objects.get(ref_num=place['ref_num'])
+				p.wikipedia_url = WIKIPEDIA_BASE_URL + place['url']
+				p.save()
+				print p.name
+			except ObjectDoesNotExist:
+				print("Either the entry or blog doesn't exist.")
+
 
 		def scrape_wikipedia():
 			for state in HistoricPlace.objects.values('state').distinct():
@@ -112,8 +140,13 @@ class Command(BaseCommand):
 					state_url = get_state_wikipedia_page(state)
 					county_tables = get_county_tables(state_url)
 					for table in county_tables:
-						parse_table_and_save_objects(table)
+						if table:
+							places = get_places_from_table(table)
+							for place in places:
+								save_wiki_place(place)
+						else:
+							print table
 
-		# scrape_wikipedia()
+		scrape_wikipedia()
 
 			

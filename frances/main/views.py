@@ -23,6 +23,7 @@ class HistoricPlaceListView(ListView):
 	context_object_name = 'historic_places'
 
 	def get_queryset(self):
+		print self.kwargs['state']
 		state = self.request.GET.get('state', None)
 		# state = statestyle.get(state).name
 		if state: 
