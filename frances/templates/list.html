@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-
 <ul>
 {% for place in historic_places %}
 	<li>
@@ -15,16 +14,20 @@
 <div class="pagination">
     <span class="step-links">
         {% if page_obj.has_previous %}
-            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            <span class="move-page"><a href="?page={{ page_obj.previous_page_number }}">previous</a></span>
         {% endif %}
 
         <span class="current">
-            Page {{ page_obj.number }} of {{ paginator.num_pages }}.
+            <em>
+                Page {{ page_obj.number }} of {{ paginator.num_pages }}
+            </em>
         </span>
 
         {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <span class="move-page"><a href="?page={{ page_obj.next_page_number }}">next</a></span>
+            <span class="move-page"><a href="?page=last">last</a></span>
         {% endif %}
+
     </span>
 </div>
 

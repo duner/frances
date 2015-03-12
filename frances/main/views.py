@@ -9,11 +9,12 @@ import statestyle
 class HomeView(TemplateView):
     template_name = 'index.html'
 
-    def get_context_data(self, **kwargs):
-        context = super(HomeView, self).get_context_data(**kwargs)
-        places = models.HistoricPlace.objects.filter(name__icontains="Lake")
-        context["places"] = places
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = super(HomeView, self).get_context_data(**kwargs)
+    #     places = models.HistoricPlace.objects.filter
+    #     context["places"] = places
+    #     return context
+    # ALEX, TOOK THESE OUT SO I COULD MAKE INDEX.HTML A HOME PAGE (WITH NO DATA ON IT)
 
 
 class HistoricPlaceListView(ListView):

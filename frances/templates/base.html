@@ -6,13 +6,26 @@
   <title>Frances</title>
   <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=1">
 
-  <link rel="stylesheet" href="{% static 'css/app.css' %}">
-  <script src="{% static 'js/app.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'styles/main.css' %}">
+
+  <!-- <link rel="stylesheet" href="{% static 'css/app.css' %}"> -->
+  <script src="{% static 'scripts/app.js' %}"></script>
+  <link href='http://fonts.googleapis.com/css?family=Lora:400,700|Muli:300,400' rel='stylesheet' type='text/css'>
 
 </head>
+<div class="nav">
+	<a href="{% url 'home' %}">
+    	Frances
+	</a>
+</div>
+
 <body>
+	<div class="wrapper">
 
   {% block content %}{% endblock %}
-	 
+
+  		 <div class="push"></div>
+	</div>	 
 </body>
+<div class="footer"><em>Frances 2015</em></div>
 </html>
