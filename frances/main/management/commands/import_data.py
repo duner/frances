@@ -25,7 +25,7 @@ class Command(BaseCommand):
 		}
 
 		kml_file = os.path.abspath('frances/main/data/doc.kml')
-		lm = LayerMapping(HistoricPlace, kml_file, mapping)
+		lm = LayerMapping(HistoricPlace, kml_file, mapping, source_srs='900913')
 		lm.save(verbose=True)
 
 		def match_property_from_description(place, pattern, state=False):
